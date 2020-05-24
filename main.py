@@ -1,6 +1,6 @@
 from typing import List
 import os
-from fastapi import FastAPI, Header
+from fastapi import FastAPI, Header, Request
 from pydantic import BaseModel
 import requests
 
@@ -9,143 +9,145 @@ app = FastAPI()
 
 
 class User(BaseModel):
-    name: str
-    username: str
-    avatar_url: str
-    email: str
-class Project(BaseModel):
-    id: int
-    name: str
-    description: str
-    web_url: str
+    name: str = None
+    username: str = None
     avatar_url: str = None
-    git_ssh_url: str
-    git_http_url: str
-    namespace: str
-    visibility_level: int
-    path_with_namespace: str
-    default_branch: str
+    email: str = None
+class Project(BaseModel):
+    id: int = None
+    name: str = None
+    description: str = None
+    web_url: str = None
+    avatar_url: str = None
+    git_ssh_url: str = None
+    git_http_url: str = None
+    namespace: str = None
+    visibility_level: int = None
+    path_with_namespace: str = None
+    default_branch: str = None
     ci_config_path: str = None
-    homepage: str
-    url: str
-    ssh_url: str
-    http_url: str
+    homepage: str = None
+    url: str = None
+    ssh_url: str = None
+    http_url: str = None
 
 class TotalTimeSpent(BaseModel):
     previous: int = None
     current: int = None
 
 class Person(BaseModel):
-    name: str
-    username: str
-    avatar_url: str
-    email: str
+    name: str = None
+    username: str = None
+    avatar_url: str = None
+    email: str = None
 class Assignees(BaseModel):
     previous: List[Person] = []
     current: List[Person] = []
 
 class MergeParams(BaseModel):
-    force_remove_source_branch: str
+    force_remove_source_branch: str = None
 
 class Repo(BaseModel):
-    id: int
-    name: str
-    description: str
-    web_url: str
+    id: int = None
+    name: str = None
+    description: str = None
+    web_url: str = None
     avatar_url: str = None
-    git_ssh_url: str
-    git_http_url: str
-    namespace: str
-    visibility_level: int
-    path_with_namespace: str
-    default_branch: str
+    git_ssh_url: str = None
+    git_http_url: str = None
+    namespace: str = None
+    visibility_level: int = None
+    path_with_namespace: str = None
+    default_branch: str = None
     ci_config_path: str = None
-    homepage: str
-    url: str
-    ssh_url: str
-    http_url: str
+    homepage: str = None
+    url: str = None
+    ssh_url: str = None
+    http_url: str = None
 
 
 class Author(BaseModel):
-    name: str
-    email: str
+    name: str = None
+    email: str = None
 
 class Repository(BaseModel):
-    name: str
-    url: str
-    description: str
-    homepage: str
+    name: str = None
+    url: str = None
+    description: str = None
+    homepage: str = None
 class Changes(BaseModel):
-    assignees: Assignees
-    total_time_spent: TotalTimeSpent
+    assignees: Assignees = None
+    total_time_spent: TotalTimeSpent = None
 class LastCommit(BaseModel):
-    id: str
-    message: str
-    timestamp: str
-    url: str
-    author: Author
+    id: str = None
+    message: str = None
+    timestamp: str = None
+    url: str = None
+    author: Author = None
 class ObjectAttributes(BaseModel):
-    assignee_id: int
-    author_id: int
-    created_at: str
-    description: str
-    head_pipeline_id: int
-    id: int
-    iid: int
+    assignee_id: int = None
+    author_id: int = None
+    created_at: str = None
+    description: str = None
+    head_pipeline_id: int = None
+    id: int = None
+    iid: int = None
     last_edited_at: str = None
     last_edited_by_id: str = None
-    merge_commit_sha: str
+    merge_commit_sha: str = None
     merge_error: str = None
-    merge_params: MergeParams
-    merge_status: str
+    merge_params: MergeParams = None
+    merge_status: str = None
     merge_user_id: int = None
     merge_when_pipeline_succeeds: bool = False
     milestone_id: int = None
-    source_branch: str
+    source_branch: str = None
     source_project_id: int = None
-    state_id: int 
-    target_branch: str
-    target_project_id: int 
-    time_estimate: int
-    title: str
-    updated_at: str
+    state_id: int  = None
+    target_branch: str = None
+    target_project_id: int  = None
+    time_estimate: int = None
+    title: str = None
+    updated_at: str = None
     updated_by_id: int = None
-    url: str
-    source: Repo
-    target: Repo
-    last_commit: LastCommit
-    work_in_progress: bool
-    total_time_spent: int
+    url: str = None
+    source: Repo = None
+    target: Repo = None
+    last_commit: LastCommit = None
+    work_in_progress: bool = None
+    total_time_spent: int = None
     human_total_time_spent: int = None
     human_time_estimate: int = None
     assignee_ids: List[int] = []
-    state: str
+    state: str = None
+    action: str = None
+    oldrev: str = None
 class Project(BaseModel):
-    id: int
-    name: str
-    description: str
-    web_url: str
+    id: int = None
+    name: str = None
+    description: str = None
+    web_url: str = None
     avatar_url: str = None
-    git_ssh_url: str
-    git_http_url: str
-    namespace: str
-    visibility_level: int
-    path_with_namespace: str
-    default_branch: str
+    git_ssh_url: str = None
+    git_http_url: str = None
+    namespace: str = None
+    visibility_level: int = None
+    path_with_namespace: str = None
+    default_branch: str = None
     ci_config_path: str = None
-    homepage: str
-    url: str
-    ssh_url: str
-    http_url: str
+    homepage: str = None
+    url: str = None
+    ssh_url: str = None
+    http_url: str = None
 class GitlabWebhook(BaseModel):
-    object_kind: str
-    event_type: str
-    user: User
-    project: Project
-    object_attributes: ObjectAttributes
+    object_kind: str = None
+    event_type: str = None
+    user: User = None
+    project: Project = None
+    object_attributes: ObjectAttributes = None
     lables: List[str] = []
-    changes: Changes
-    repository: Repository
+    changes: Changes = None
+    repository: Repository = None
     assignees: List[Person] = []
 
 
@@ -155,14 +157,13 @@ async def read_root():
 
 @app.post("/")
 async def post_root(body: GitlabWebhook):
-    print(body.object_attributes.merge_status)
-    headers = {'PRIVATE-TOKEN': os.environ['AB_PRIVATE_TOKEN']}
-    url = str(os.environ['AB_GITLAB_URL']) +'projects/' +str(body.object_attributes.target_project_id)
-    print(headers)
-    print(url)
-    # r = requests.get(url, headers=headers)
+    project_id = 6484
+    component_name_to_delete = 'canary-' + body.project.name + '-' + body.object_attributes.source_branch + '-9-6'
+    mr_action = body.object_attributes.action
+    print(body.object_attributes.action)
+    if mr_action != "closed" or mr_action != "merged":
+        payload = {'ref': 'delete-pods', 'variables[][key]': 'COMPONENT_TO_DELETE','variables[][value]' : component_name_to_delete }
+        headers = {'PRIVATE-TOKEN': os.environ['AB_PRIVATE_TOKEN']}
+        url = str(os.environ['AB_GITLAB_URL']) +'projects/' + str(project_id) + '/pipeline'
+        r = requests.post(url, headers=headers, params=payload)
     return {"Hello": "World post"}
-
-@app.get("/items/{item_id}")
-async def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
